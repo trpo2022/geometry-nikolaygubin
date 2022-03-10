@@ -31,11 +31,40 @@ void init_figure(char *str, char *figure)
     }
 }
 
+bool check_fig(char *figure, char *ex_fig)
+{
+    if (strlen(figure) != strlen(ex_fig)) {
+        return false;
+    }
+    for (int i = 0; i < strlen(ex_fig); i++) {
+        if (figure[i] != ex_fig[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int init_mas_digit(char *str, char *numbers)
+{
+    int i, k = 0;
+    for (i = 0; i < N; i++) {
+        if (str[i] == ')') {
+            break;
+        }
+        if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.' || str[i] == ',' || str[i] == ' ' || str[i] == '-') {
+            numbers[k] = str[i];
+            k += 1;
+        }    
+    }
+    return k;
+}
+
+
 int main()
 {
     circle Circle;
     triangle Triangle;
-    
+
     FILE* file = fopen("output.txt", "r");
     int i = 0, k = 0, number_of_figures;
     char *str = NULL, *figure =  NULL, cir[7] = {"circle"}, tri[9] = {"triangle"}, numbers[N];
@@ -49,6 +78,14 @@ int main()
 
         fgets(str, 100, file);
         init_figure(str, figure);
+
+
+        if (check_fig(figure, cir) == true) {
+            int len = init_mas_digit(str, numbers);
+        }
+        else if (check_fig(figure, tri) == true) {
+            int len = init_mas_digit(str, numbers);  
+        }
 
         free(str);
         free(figure);
