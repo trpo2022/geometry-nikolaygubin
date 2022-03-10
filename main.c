@@ -59,6 +59,72 @@ int init_mas_digit(char *str, char *numbers)
     return k;
 }
 
+float init_coordinate(char *numbers, int *k, int len)
+{
+    float coord = 0, mnoj = 1, del = 10; // mnoj - множитель разряда ; del - делитель разряда
+    int j = *k;
+    if (numbers[j] == '-') {
+        j++;
+        while (numbers[j] != '.' && numbers[j] != ' ' && numbers[j] != ',') {
+            if (j == len) {
+                coord = coord - 2 * coord;
+                return coord;
+            }
+            coord *= 10;
+            coord += (numbers[j] - '0');
+            mnoj *= 10;
+            j++;
+        }
+        if (numbers[j] == '.') {
+            j++;
+            while (numbers[j] != ',' && numbers[j] != ' ') {
+                coord += (numbers[j] - '0') / del;
+                del *= 10;
+                if (j == len) {
+                    coord = coord - 2 * coord;
+                    return coord;
+                }
+                j++;
+            }
+        }
+        if (numbers[j] == ',') {
+            j++;
+        }
+        j++;
+        *k = j;
+        coord = coord - 2 * coord;
+        return coord;
+    }
+
+    else {
+        while (numbers[j] != '.' && numbers[j] != ' ' && numbers[j] != ',') {
+            if (j == len) {
+                return coord;
+            }
+            coord += (numbers[j] - '0') * mnoj;
+            mnoj *= 10;
+            j++;
+        }
+        if (numbers[j] == '.') {
+            j++;
+            while (numbers[j] != ',' && numbers[j] != ' ') {
+                coord += (numbers[j] - '0') / del;
+                del *= 10;
+                if (j == len) {
+                    return coord;
+                }
+                j++;
+            }
+        }
+        if (numbers[j] == ',') {
+            j++;
+        }
+        j++;
+        *k = j;
+        return coord;
+    }
+}
+
 
 int main()
 {
@@ -82,9 +148,28 @@ int main()
 
         if (check_fig(figure, cir) == true) {
             int len = init_mas_digit(str, numbers);
+
+            k = 0;
+            Circle.mid.x = init_coordinate(numbers, &k, len);
+            Circle.mid.y = init_coordinate(numbers, &k, len);
+
+            Circle.rad = init_coordinate(numbers, &k, len) ;
         }
         else if (check_fig(figure, tri) == true) {
-            int len = init_mas_digit(str, numbers);  
+            int len = init_mas_digit(str, numbers);
+
+            k = 0;
+            Triangle.first.x = init_coordinate(numbers, &k, len);
+            Triangle.first.y = init_coordinate(numbers, &k, len);
+
+            Triangle.second.x = init_coordinate(numbers, &k, len);
+            Triangle.second.y = init_coordinate(numbers, &k, len);
+
+            Triangle.third.x = init_coordinate(numbers, &k, len);
+            Triangle.third.y = init_coordinate(numbers, &k, len);
+
+            Triangle.fourth.x = init_coordinate(numbers, &k, len);
+            Triangle.fourth.y = init_coordinate(numbers, &k, len);  
         }
 
         free(str);
