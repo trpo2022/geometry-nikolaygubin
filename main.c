@@ -4,6 +4,26 @@
 #include <stdbool.h>
 #define N 100
 
+typedef struct 
+{
+    float x;
+    float y;
+} point;
+
+typedef struct 
+{
+    point mid;
+    float rad;    
+}circle;
+
+typedef struct 
+{
+    point first;
+    point second;
+    point third;
+    point fourth;
+} triangle;
+
 void init_figure(char *str, char *figure)
 {
     for (int i = 0; str[i] != '('; i++) {
@@ -13,6 +33,9 @@ void init_figure(char *str, char *figure)
 
 int main()
 {
+    circle Circle;
+    triangle Triangle;
+    
     FILE* file = fopen("output.txt", "r");
     int i = 0, k = 0, number_of_figures;
     char *str = NULL, *figure =  NULL, cir[7] = {"circle"}, tri[9] = {"triangle"}, numbers[N];
