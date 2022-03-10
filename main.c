@@ -154,6 +154,11 @@ int main()
             Circle.mid.y = init_coordinate(numbers, &k, len);
 
             Circle.rad = init_coordinate(numbers, &k, len) ;
+
+            printf("%s(%.1f %.1f, %.1f)\n",
+            figure, 
+            Circle.mid.x, Circle.mid.y, 
+            Circle.rad);
         }
         else if (check_fig(figure, tri) == true) {
             int len = init_mas_digit(str, numbers);
@@ -169,7 +174,14 @@ int main()
             Triangle.third.y = init_coordinate(numbers, &k, len);
 
             Triangle.fourth.x = init_coordinate(numbers, &k, len);
-            Triangle.fourth.y = init_coordinate(numbers, &k, len);  
+            Triangle.fourth.y = init_coordinate(numbers, &k, len);
+
+            printf("%s(%.f %.1f, %.1f %.1f, %.1f %.1f, %.1f %.1f)\n", 
+            figure,
+            Triangle.first.x, Triangle.first.y, 
+            Triangle.second.x, Triangle.second.y, 
+            Triangle.third.x, Triangle.third.y, 
+            Triangle.fourth.x, Triangle.fourth.y);
         }
 
         free(str);
