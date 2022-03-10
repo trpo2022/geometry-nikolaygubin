@@ -44,11 +44,15 @@ bool check_fig(char *figure, char *ex_fig)
     return true;
 }
 
-int init_mas_digit(char *str, char *numbers)
+int init_mas_digit(char *str, char *numbers, int *error)
 {
     int i, k = 0;
     for (i = 0; i < N; i++) {
         if (str[i] == ')') {
+            *error = 0;
+            if ((str[i + 1] >= '0' && str[i + 1] <= '9') || (str[i + 2] >= '0' && str[i + 2] <= '9')) {
+                *error = 2;
+            }
             break;
         }
         if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.' || str[i] == ',' || str[i] == ' ' || str[i] == '-') {
@@ -132,7 +136,7 @@ int main()
     triangle Triangle;
 
     FILE* file = fopen("output.txt", "r");
-    int i = 0, k = 0, number_of_figures;
+    int i = 0, k = 0, number_of_figures, error = 1;
     char *str = NULL, *figure =  NULL, cir[7] = {"circle"}, tri[9] = {"triangle"}, numbers[N];
 
     printf("Enter the number figures : ");
@@ -147,7 +151,17 @@ int main()
 
 
         if (check_fig(figure, cir) == true) {
-            int len = init_mas_digit(str, numbers);
+            int len = init_mas_digit(str, numbers, &error);
+            if (error == 1) {
+                printf("Error at column %d: expected ')'", i + 1);
+                printf("\n");
+                continue;;
+            }
+            if (error == 2) {
+                printf("Error at column %d: unexpected token", i + 1);
+                printf("\n");
+                continue;;
+            }
 
             k = 0;
             Circle.mid.x = init_coordinate(numbers, &k, len);
@@ -161,7 +175,18 @@ int main()
             Circle.rad);
         }
         else if (check_fig(figure, tri) == true) {
-            int len = init_mas_digit(str, numbers);
+            int len = init_mas_digit(str, numbers, &error);
+            if (error == 1) {
+                printf("Error at column %d: expected ')'", i + 1);
+                printf("\n");
+                continue;;
+            }
+            if (error == 2) {
+                printf("Error at column %d: unexpected token", i + 1);
+                printf("\n");
+                continue;;
+            }
+
 
             k = 0;
             Triangle.first.x = init_coordinate(numbers, &k, len);
@@ -183,7 +208,11 @@ int main()
             Triangle.third.x, Triangle.third.y, 
             Triangle.fourth.x, Triangle.fourth.y);
         }
+        else {
+            printf("Error at column %d: expected 'circle' or 'triangle'\n", i + 1);
+        }
 
+        error = 1;
         free(str);
         free(figure);
     }
