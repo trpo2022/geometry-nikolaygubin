@@ -65,7 +65,7 @@ int init_mas_digit(char *str, char *numbers, int *error)
 
 float init_coordinate(char *numbers, int *k, int len)
 {
-    float coord = 0, mnoj = 1, del = 10; // mnoj - множитель разряда ; del - делитель разряда
+    float coord = 0, del = 10; // del - делитель разряда
     int j = *k;
     if (numbers[j] == '-') {
         j++;
@@ -76,7 +76,6 @@ float init_coordinate(char *numbers, int *k, int len)
             }
             coord *= 10;
             coord += (numbers[j] - '0');
-            mnoj *= 10;
             j++;
         }
         if (numbers[j] == '.') {
@@ -105,8 +104,8 @@ float init_coordinate(char *numbers, int *k, int len)
             if (j == len) {
                 return coord;
             }
-            coord += (numbers[j] - '0') * mnoj;
-            mnoj *= 10;
+            coord *= 10;
+            coord += (numbers[j] - '0');
             j++;
         }
         if (numbers[j] == '.') {
@@ -201,12 +200,17 @@ int main()
             Triangle.fourth.x = init_coordinate(numbers, &k, len);
             Triangle.fourth.y = init_coordinate(numbers, &k, len);
 
-            printf("%s(%.f %.1f, %.1f %.1f, %.1f %.1f, %.1f %.1f)\n", 
-            figure,
-            Triangle.first.x, Triangle.first.y, 
-            Triangle.second.x, Triangle.second.y, 
-            Triangle.third.x, Triangle.third.y, 
-            Triangle.fourth.x, Triangle.fourth.y);
+            if (Triangle.first.x == Triangle.fourth.x && Triangle.first.y == Triangle.fourth.y){
+                printf("%s(%.1f %.1f, %.1f %.1f, %.1f %.1f, %.1f %.1f)\n", 
+                figure,
+                Triangle.first.x, Triangle.first.y, 
+                Triangle.second.x, Triangle.second.y, 
+                Triangle.third.x, Triangle.third.y, 
+                Triangle.fourth.x, Triangle.fourth.y);   
+            }
+            else {
+                printf("Error at column %d: the Triangle does not close\n", i + 1);
+            }
         }
         else {
             printf("Error at column %d: expected 'circle' or 'triangle'\n", i + 1);
