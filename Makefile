@@ -4,7 +4,7 @@ CFLAGS = -I/mnt/c/Users/Николай/.vscode/semak2/git/geometry-nikolaygubin/
 CPPFLAGS = -MMD
 
 $(TARGET) : ./obj/src/geometry/*.o ./obj/src/libgeometry/*.a
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ -lm
 
 ./obj/src/geometry/*.o : ./src/geometry/main.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<

@@ -43,6 +43,9 @@ int main()
             figure, 
             Circle.mid.x, Circle.mid.y, 
             Circle.rad);
+
+            float circle_perimeter = 2 * M_PI * Circle.rad, circle_area = M_PI * pow(Circle.rad, 2);
+            printf("Perimetr = %.1f\nArea = %.1f\n\n", circle_perimeter, circle_area);
         }
         else if (check_fig(figure, tri) == true) {
             int len = init_mas_digit(str, numbers, &error);
@@ -82,6 +85,15 @@ int main()
             else {
                 printf("Error at column %d: the Triangle does not close\n", i + 1);
             }
+
+            float first_side = len_of_side(Triangle.first.x, Triangle.first.y, Triangle.second.x, Triangle.second.y);
+            float second_side = len_of_side(Triangle.second.x, Triangle.second.y, Triangle.third.x, Triangle.third.y);
+            float third_side = len_of_side(Triangle.third.x, Triangle.third.y, Triangle.fourth.x, Triangle.fourth.y);
+            float polu_perimeter = (first_side + second_side + third_side) / 2;
+
+            float triangle_perimeter = polu_perimeter * 2, triangle_area = sqrt(polu_perimeter * (polu_perimeter - first_side)\
+            * (polu_perimeter - second_side) * (polu_perimeter - third_side));
+            printf("Perimetr = %.1f\nArea = %.1f\n\n", triangle_perimeter, triangle_area);
         }
         else {
             printf("Error at column %d: expected 'circle' or 'triangle'\n", i + 1);
