@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
 #define N 100
 
 typedef struct 
@@ -33,3 +34,5 @@ bool check_fig(char *figure, char *ex_fig);
 int init_mas_digit(char *str, char *numbers, int *error);
 
 float init_coordinate(char *numbers, int *k, int len);
+
+float len_of_side(float x1, float y1, float x2, float y2);

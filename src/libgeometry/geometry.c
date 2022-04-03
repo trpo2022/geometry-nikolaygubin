@@ -103,3 +103,28 @@ float init_coordinate(char *numbers, int *k, int len)
         return coord;
     }
 }
+
+float len_of_side(float x1, float y1, float x2, float y2)
+{
+    float first_katet, second_katet, hypotenuse;
+
+    if (x2 > x1) {
+        first_katet = x2 - x1;
+    }
+    else {
+        first_katet = x1 - x2;
+    }
+
+    if (y2 > y1) {
+        second_katet = y2 - y1;
+    }
+    else {
+        second_katet = y1 - y2;
+    }
+    hypotenuse = sqrt(pow(first_katet, 2) + pow(second_katet, 2));
+
+    return hypotenuse;
+
+    
+
+}
