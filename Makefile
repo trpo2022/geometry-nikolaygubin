@@ -1,6 +1,6 @@
 TARGET = bin/geometry
 CC = gcc
-CFLAGS = -I/mnt/c/Users/Николай/.vscode/semak2/git/geometry-nikolaygubin/src/ -Wall -Wextra -Werror -O0 -g
+CFLAGS = -I src/ -Wall -Wextra -Werror -O0 -g
 CPPFLAGS = -MMD
 
 $(TARGET) : ./obj/src/geometry/*.o ./obj/src/libgeometry/*.a
