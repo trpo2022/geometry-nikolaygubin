@@ -2,6 +2,7 @@ TARGET = bin/geometry
 CC = gcc
 CFLAGS = -I src/ -Wall -Wextra -Werror -O0 -g
 CPPFLAGS = -MMD
+.PHONY : clean
 
 $(TARGET) : ./obj/src/geometry/*.o ./obj/src/libgeometry/*.a
 	$(CC) $(CFLAGS) -o $@ $^ -lm
