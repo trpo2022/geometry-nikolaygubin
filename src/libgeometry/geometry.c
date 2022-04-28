@@ -125,3 +125,104 @@ float len_of_side(float x1, float y1, float x2, float y2)
 
     return hypotenuse;
 }
+
+int print_errors(int error, int i)
+{
+    if (error == 1) {
+        printf("Error at column %d: expected ')'", i + 1);
+        printf("\n");
+        return -1;
+    }
+    if (error == 2) {
+        printf("Error at column %d: unexpected token", i + 1);
+        printf("\n");
+        return -1;
+    }
+
+    return 0;
+}
+
+void perimetr_and_area_circle(
+        circle* Circle, float* circle_perimeter, float* circle_area)
+{
+    *circle_perimeter = 2 * M_PI * Circle->rad;
+    *circle_area = M_PI * pow(Circle->rad, 2);
+    printf("Perimetr = %.1f\nArea = %.1f\n\n", *circle_perimeter, *circle_area);
+}
+
+void perimetr_and_area_triangle(
+        triangle* Triangle, float* triangle_perimeter, float* triangle_area)
+{
+    float first_side = len_of_side(
+            Triangle->first.x,
+            Triangle->first.y,
+            Triangle->second.x,
+            Triangle->second.y);
+    float second_side = len_of_side(
+            Triangle->second.x,
+            Triangle->second.y,
+            Triangle->third.x,
+            Triangle->third.y);
+    float third_side = len_of_side(
+            Triangle->third.x,
+            Triangle->third.y,
+            Triangle->fourth.x,
+            Triangle->fourth.y);
+
+    float polu_perimeter = (first_side + second_side + third_side) / 2;
+
+    *triangle_perimeter = polu_perimeter * 2;
+    *triangle_area = sqrt(
+            polu_perimeter * (polu_perimeter - first_side)
+            * (polu_perimeter - second_side) * (polu_perimeter - third_side));
+    printf("Perimetr = %.1f\nArea = %.1f\n\n",
+           *triangle_perimeter,
+           *triangle_area);
+}
+
+void init_and_print_circle(
+        circle* Circle, char* numbers, int* k, int len, char* figure)
+{
+    Circle->mid.x = init_coordinate(numbers, k, len);
+    Circle->mid.y = init_coordinate(numbers, k, len);
+
+    Circle->rad = init_coordinate(numbers, k, len);
+
+    printf("%s(%.1f %.1f, %.1f)\n",
+           figure,
+           Circle->mid.x,
+           Circle->mid.y,
+           Circle->rad);
+}
+
+void init_and_print_triangle(
+        triangle* Triangle, char* numbers, int* k, int len, char* figure)
+{
+    Triangle->first.x = init_coordinate(numbers, k, len);
+    Triangle->first.y = init_coordinate(numbers, k, len);
+
+    Triangle->second.x = init_coordinate(numbers, k, len);
+    Triangle->second.y = init_coordinate(numbers, k, len);
+
+    Triangle->third.x = init_coordinate(numbers, k, len);
+    Triangle->third.y = init_coordinate(numbers, k, len);
+
+    Triangle->fourth.x = init_coordinate(numbers, k, len);
+    Triangle->fourth.y = init_coordinate(numbers, k, len);
+
+    if (Triangle->first.x == Triangle->fourth.x
+        && Triangle->first.y == Triangle->fourth.y) {
+        printf("%s(%.1f %.1f, %.1f %.1f, %.1f %.1f, %.1f %.1f)\n",
+               figure,
+               Triangle->first.x,
+               Triangle->first.y,
+               Triangle->second.x,
+               Triangle->second.y,
+               Triangle->third.x,
+               Triangle->third.y,
+               Triangle->fourth.x,
+               Triangle->fourth.y);
+    } else {
+        printf("Triangle not a closed\n");
+    }
+}

@@ -22,4 +22,4 @@ run :
 clean : 
 	rm ./obj/src/geometry/*.d ./obj/src/geometry/*.o ./obj/src/libgeometry/*.d ./obj/src/libgeometry/*.a ./obj/src/libgeometry/*.o $(TARGET)
 
--include main.d hello.d
+-include main.d geometry.d
