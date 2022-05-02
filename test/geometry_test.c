@@ -1,5 +1,6 @@
 #include <libgeometry/geometry.h>
 
+#include <stdio.h>
 #include <ctest.h>
 #include <stdlib.h>
 
@@ -17,10 +18,14 @@ CTEST(figure, test1) {
 
 
 CTEST(digit, test1) {
-    
-}
-CTEST(digit, test2) {
-    
+    int error = 0;
+    char* numbers = malloc(sizeof(char) * 100), str[] = "triangle((-3.0 -2, -1 0.0, -3.0 2.0, -3 -2))"; 
+    int len = init_mas_digit(str, numbers, &error);
+
+    char nums[] = "-3.0 -2, -1 0.0, -3.0 2.0, -3 -2";
+
+    ASSERT_EQUAL(32, len);
+    ASSERT_STR(nums, numbers);
 }
 
 
