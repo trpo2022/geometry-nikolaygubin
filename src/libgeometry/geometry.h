@@ -15,6 +15,8 @@ typedef struct {
 typedef struct {
     point mid;
     float rad;
+    float perimetr;
+    float area;
 } circle;
 
 typedef struct {
@@ -22,6 +24,8 @@ typedef struct {
     point second;
     point third;
     point fourth;
+    float perimetr;
+    float area;
 } triangle;
 
 void init_figure(char* str, char* figure);
@@ -36,14 +40,12 @@ float len_of_side(float x1, float y1, float x2, float y2);
 
 int print_errors(int error, int i);
 
-void perimetr_and_area_circle(
-        circle* Circle, float* circle_perimeter, float* circle_area);
+void perimetr_and_area_circle(circle* Circle);
 
-void perimetr_and_area_triangle(
-        triangle* Triangle, float* triangle_perimeter, float* triangle_area);
+void perimetr_and_area_triangle(triangle* Triangle);
 
-void init_and_print_circle(
-        circle* Circle, char* numbers, int* k, int len, char* figure);
+void init_circle(
+        circle* Circle, char* numbers, int* k, int len);
 
-void init_and_print_triangle(
-        triangle* Triangle, char* numbers, int* k, int len, char* figure);
+void init_triangle(
+        triangle* Triangle, char* numbers, int* k, int len);
