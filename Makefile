@@ -21,7 +21,7 @@ $(TARGET) : ./obj/src/geometry/main.o ./obj/src/libgeometry/*.a
 ./obj/test/libtest/*.o : ./test/geometry_test.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
-$(TARGET1) : ./obj/src/libgeometry/*.a ./obj/test/libtest/*.o ./obj/test/test/main.o
+$(TARGET1) : ./obj/src/libgeometry/*.a ./obj/test/libtest/*.o ./obj/test/test/main.o ./obj/src/libgeometry/*.o
 	$(CC) $(CFLAGS) -o $@ $^ -lm
 
 ./obj/test/test/main.o : ./test/main.c
@@ -34,6 +34,6 @@ run :
 	$(TARGET)
 
 clean : 
-	rm ./obj/src/geometry/*.o ./obj/src/libgeometry/*.a ./obj/src/libgeometry/*.o $(TARGET) ./obj/test/libtest/*.o $(TARGET1) ./obj/src/geometry/main.d ./obj/src/libgeometry/*.d ./obj/test/libtest/*.d
+	rm ./obj/src/geometry/*.o ./obj/src/libgeometry/*.a ./obj/src/libgeometry/*.o $(TARGET) ./obj/test/libtest/*.o $(TARGET1) ./obj/src/geometry/main.d ./obj/src/libgeometry/*.d ./obj/test/libtest/*.d ./obj/test/test/*.d ./obj/test/test/*.o
 
 -include ./obj/src/geometry/main.d ./obj/src/libgeometry/*.d ./obj/test/libtest/*.d ./obj/test/libtest/*.d
