@@ -44,8 +44,6 @@ void perimetr_and_area_circle(circle* Circle);
 
 void perimetr_and_area_triangle(triangle* Triangle);
 
-void init_circle(
-        circle* Circle, char* numbers, int* k, int len);
+void init_circle(circle* Circle, char* numbers, int* k, int len);
 
-void init_triangle(
-        triangle* Triangle, char* numbers, int* k, int len);
+void init_triangle(triangle* Triangle, char* numbers, int* k, int len);

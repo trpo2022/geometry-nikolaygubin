@@ -212,12 +212,12 @@ void assert_dbl_far(double exp, double real, double tol, const char* caller, int
 
 #include <setjmp.h>
 #include <stdarg.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
 #include <unistd.h>
-#include <stdint.h>
-#include <stdlib.h>
 #include <wchar.h>
 
 static size_t ctest_errorsize;

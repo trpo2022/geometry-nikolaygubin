@@ -178,18 +178,15 @@ void perimetr_and_area_triangle(triangle* Triangle)
     Triangle->area = triangle_area;
 }
 
-void init_circle(
-        circle* Circle, char* numbers, int* k, int len)
+void init_circle(circle* Circle, char* numbers, int* k, int len)
 {
     Circle->mid.x = init_coordinate(numbers, k, len);
     Circle->mid.y = init_coordinate(numbers, k, len);
 
     Circle->rad = init_coordinate(numbers, k, len);
-
 }
 
-void init_triangle(
-        triangle* Triangle, char* numbers, int* k, int len)
+void init_triangle(triangle* Triangle, char* numbers, int* k, int len)
 {
     Triangle->first.x = init_coordinate(numbers, k, len);
     Triangle->first.y = init_coordinate(numbers, k, len);
