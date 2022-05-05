@@ -81,7 +81,7 @@ CTEST(area_and_perimetr, test3)
 CTEST(init_struct, test1)
 {
     circle Circle; // circle(0 0, 1.5)
-    char numbers[100] = "0 0, 1.5";
+    char numbers[100] = "0 0, 1.5 ";
     int k = 0, len = strlen(numbers);
     init_circle(&Circle, numbers, &k, len);
 
