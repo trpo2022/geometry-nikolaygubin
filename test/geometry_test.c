@@ -77,3 +77,35 @@ CTEST(area_and_perimetr, test3)
     ASSERT_DBL_NEAR(Triangle.perimetr, perimetr);
     ASSERT_DBL_NEAR(Triangle.area, area);
 }
+
+CTEST(init_struct, test1)
+{
+    circle Circle; // circle(0 0, 1.5)
+    char numbers[100] = "0 0, 1.5";
+    int k = 0, len = strlen(numbers);
+    init_circle(&Circle, numbers, &k, len);
+
+    float x = 0, y = 0, rad = 1.5;
+
+    ASSERT_DBL_NEAR(Circle.mid.x, x);
+    ASSERT_DBL_NEAR(Circle.mid.y, y);
+    ASSERT_DBL_NEAR(Circle.rad, rad);
+}
+CTEST(init_struct, test2)
+{
+    triangle Triangle; // triangle((-3.0 -2, -1 0.0, -3.0 2.0, -3 -2))
+    char numbers[100] = "-3.0 -2, -1 0.0, -3.0 2.0, -3 -2";
+    int k = 0, len = strlen(numbers);
+    init_triangle(&Triangle, numbers, &k, len);
+
+    float x1 = -3, y1 = -2, x2 = -1, y2 = 0, x3 = -3, y3 = 2, x4 = -3, y4 = -2;
+
+    ASSERT_DBL_NEAR(Triangle.first.x, x1);
+    ASSERT_DBL_NEAR(Triangle.first.y, y1);
+    ASSERT_DBL_NEAR(Triangle.second.x, x2);
+    ASSERT_DBL_NEAR(Triangle.second.y, y2);
+    ASSERT_DBL_NEAR(Triangle.third.x, x3);
+    ASSERT_DBL_NEAR(Triangle.third.y, y3);
+    ASSERT_DBL_NEAR(Triangle.fourth.x, x4);
+    ASSERT_DBL_NEAR(Triangle.fourth.y, y4);
+}
