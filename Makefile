@@ -3,26 +3,25 @@ TARGET1 = bin/test
 CC = gcc
 CFLAGS = -I src/ -I thirdparty/ -Wall -Wextra -Werror -O0 -g
 CPPFLAGS = -MMD
-.PHONY : clean
 .PHONY : test
 
-$(TARGET) : ./obj/src/geometry/main.o ./obj/src/libgeometry/*.a 
+$(TARGET) : ./obj/src/geometry/main.o ./obj/src/libgeometry/libgeo.a 
 	$(CC) $(CFLAGS) -o $@ $^ -lm
 
 ./obj/src/geometry/main.o : ./src/geometry/main.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
-./obj/src/libgeometry/*.a : ./obj/src/libgeometry/*.o ./obj/test/libtest/*.o
+./obj/src/libgeometry/libgeo.a : ./obj/src/libgeometry/geometry.o
 	ar rcs $@ $^
 
-./obj/src/libgeometry/*.o : ./src/libgeometry/geometry.c
+./obj/src/libgeometry/geometry.o : ./src/libgeometry/geometry.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
-./obj/test/libtest/*.o : ./test/geometry_test.c
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
-
-$(TARGET1) : ./obj/src/libgeometry/*.a ./obj/test/libtest/*.o ./obj/test/test/main.o ./obj/src/libgeometry/*.o
+$(TARGET1) : ./obj/test/libtest/ltest.o ./obj/test/test/main.o ./obj/src/libgeometry/geometry.o
 	$(CC) $(CFLAGS) -o $@ $^ -lm
+
+./obj/test/libtest/ltest.o : ./test/geometry_test.c 
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
 ./obj/test/test/main.o : ./test/main.c
 	$(CC) -c $(CFLAGS) -o $@ $^
@@ -34,6 +33,6 @@ run :
 	$(TARGET)
 
 clean : 
-	rm ./obj/src/geometry/*.o ./obj/src/libgeometry/*.a ./obj/src/libgeometry/*.o $(TARGET) ./obj/test/libtest/*.o $(TARGET1) ./obj/src/geometry/main.d ./obj/src/libgeometry/*.d ./obj/test/libtest/*.d ./obj/test/test/*.d ./obj/test/test/*.o
+	rm ./obj/src/geometry/main.o ./obj/src/libgeometry/libgeo.a ./obj/src/libgeometry/geometry.o ./obj/src/libgeometry/geometry.d ./obj/src/geometry/main.d
 
 -include ./obj/src/geometry/main.d ./obj/src/libgeometry/*.d ./obj/test/libtest/*.d ./obj/test/libtest/*.d
