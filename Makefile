@@ -17,7 +17,7 @@ $(TARGET) : ./obj/src/geometry/main.o ./obj/src/libgeometry/libgeo.a
 ./obj/src/libgeometry/geometry.o : ./src/libgeometry/geometry.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
-$(TARGET1) : ./obj/src/libgeometry/libgeo.a ./obj/test/libtest/ltest.o ./obj/test/test/main.o ./obj/src/libgeometry/geometry.o
+$(TARGET1) : ./obj/test/libtest/ltest.o ./obj/test/test/main.o ./obj/src/libgeometry/libgeo.a
 	$(CC) $(CFLAGS) -o $@ $^ -lm
 
 ./obj/test/libtest/ltest.o : ./test/geometry_test.c 
