@@ -1,0 +1,6 @@
+bin/geometry
+bin/test
+obj/src/geometry/*.o
+obj/src/libgeometry/*.a
+obj/src/libgeometry/*.o
+obj/test/
